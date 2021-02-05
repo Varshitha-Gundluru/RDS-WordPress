@@ -1,0 +1,35 @@
+#configure with minimum required software
+dnf update –y
+
+dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+
+dnf install vim wget -y
+
+
+#Configure webserver and PHP
+dnf install httpd –y
+
+systemctl start httpd 
+
+dnf install http://rpms.remirepo.net/enterprise/remi-release-8.rpm
+
+dnf module install php:remi-7.4
+
+dnf install php - mysqlnd
+
+
+#configure database-mysql
+dnf install mysql –y
+
+mysql –h *hostname provided by RDS* -u *username given while creating RDS* -p
+
+#configuring wordpress
+wget http://wordpress.org/latest.tar.gz
+
+tar –xvzf latest.tar.gz –C /var/www/html
+
+
+#resolving errors
+setenforce 0
+
+systemcrl restart httpd
